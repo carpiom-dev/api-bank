@@ -1,4 +1,4 @@
-package com.mcarpio.bank.customers.application.ports.output;
+package com.mcarpio.bank.application.ports.output;
 
 public interface IPasswordEncoder {
     String encode(String rawPassword);

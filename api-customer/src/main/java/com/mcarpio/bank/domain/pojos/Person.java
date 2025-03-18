@@ -1,4 +1,4 @@
-package com.mcarpio.bank.people.domain.pojos;
+package com.mcarpio.bank.domain.pojos;
 
 public class Person {
 

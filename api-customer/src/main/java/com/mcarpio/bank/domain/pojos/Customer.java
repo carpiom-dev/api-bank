@@ -1,5 +1,4 @@
-package com.mcarpio.bank.customers.domain.pojos;
-import com.mcarpio.bank.people.domain.pojos.Person;
+package com.mcarpio.bank.domain.pojos;
 
 public class Customer extends Person {
 

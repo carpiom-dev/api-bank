@@ -1,8 +1,8 @@
-package com.mcarpio.bank.customers.application.ports.input;
-import com.mcarpio.bank.customers.application.ports.output.ICustomerRepository;
-import com.mcarpio.bank.customers.application.ports.output.IPasswordEncoder;
-import com.mcarpio.bank.customers.domain.exception.CustomerAlreadyExistsException;
-import com.mcarpio.bank.customers.domain.pojos.Customer;
+package com.mcarpio.bank.application.ports.input;
+import com.mcarpio.bank.application.ports.output.ICustomerRepository;
+import com.mcarpio.bank.application.ports.output.IPasswordEncoder;
+import com.mcarpio.bank.domain.exception.CustomerAlreadyExistsException;
+import com.mcarpio.bank.domain.pojos.Customer;
 
 public class SaveCustomerUseCase {
 

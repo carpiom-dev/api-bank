@@ -1,4 +1,4 @@
-package com.mcarpio.bank.customers.domain.exception;
+package com.mcarpio.bank.domain.exception;
 
 import java.time.LocalDateTime;
 

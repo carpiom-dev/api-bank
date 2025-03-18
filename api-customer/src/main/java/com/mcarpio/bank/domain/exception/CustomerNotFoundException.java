@@ -1,4 +1,4 @@
-package com.mcarpio.bank.customers.domain.exception;
+package com.mcarpio.bank.domain.exception;
 
 public class CustomerNotFoundException extends RuntimeException {
     public CustomerNotFoundException(String mensaje) {

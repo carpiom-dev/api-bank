@@ -1,6 +1,6 @@
-package com.mcarpio.bank.customers.application.ports.output;
+package com.mcarpio.bank.application.ports.output;
 
-import com.mcarpio.bank.customers.domain.pojos.Customer;
+import com.mcarpio.bank.domain.pojos.Customer;
 
 import java.util.List;
 import java.util.Optional;
