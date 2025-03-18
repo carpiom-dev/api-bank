@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mcarpio.bank</groupId>
-	<artifactId>ms-customer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>ms-customer</name>
+	<artifactId>api-customer</artifactId>
+	<version>1.0</version>
+	<name>api-customer</name>
 	<description>Microservices for managing banking transactions using a hexagonal architecture</description>
 	<url/>
 	<licenses>
