@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ms-customer
+    name: api-customer
 
   jpa:
     database: postgresql
@@ -16,10 +16,24 @@ spring:
     open-in-view: false
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/bancoapp
+    url: jdbc:postgresql://localhost:5433/BankApi
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
+
+  rabbitmq:
+    addresses: amqps://jpgtmedc:IcbxOrLUyPGZfNQJTvF7VgvyUOoT-3dn@jackal.rmq.cloudamqp.com/jpgtmedc
+    dynamic: true
+    ssl:
+      enabled: true
+
+customer:
+  exchange:
+    name: customer.exchange
+  queue:
+    name: customer.queue
+  routing:
+    key: customer.event
 
 server:
   port: 9595

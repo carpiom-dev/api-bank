@@ -1,7 +1,7 @@
-package com.mcarpio.bank.application.ports.input;
+package com.mcarpio.bank.application.ports.in;
 
-import com.mcarpio.bank.application.ports.output.ICustomerRepository;
-import com.mcarpio.bank.domain.pojos.Customer;
+import com.mcarpio.bank.application.ports.out.ICustomerRepository;
+import com.mcarpio.bank.domain.pojos.CustomerPojo;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class FindAllCustomerUseCase {
         this.customerRepository = customerRepository;
     }
 
-    public List<Customer> execute() {
+    public List<CustomerPojo> execute() {
         return customerRepository.findAll();
     }
 

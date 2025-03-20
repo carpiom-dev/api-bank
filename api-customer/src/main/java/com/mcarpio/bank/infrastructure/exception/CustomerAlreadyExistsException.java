@@ -1,4 +1,4 @@
-package com.mcarpio.bank.domain.exception;
+package com.mcarpio.bank.infrastructure.exception;
 
 public class CustomerAlreadyExistsException extends RuntimeException {
     public CustomerAlreadyExistsException(String mensaje) {

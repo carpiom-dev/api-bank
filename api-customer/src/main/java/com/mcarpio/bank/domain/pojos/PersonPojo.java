@@ -1,6 +1,6 @@
 package com.mcarpio.bank.domain.pojos;
 
-public class Person {
+public class PersonPojo {
 
     private String name;
     private String surname;
@@ -11,7 +11,7 @@ public class Person {
     private String email;
     private String phone;
 
-    public Person(String name, String surname, String gender, Integer age, String identification, String address, String email, String phone) {
+    public PersonPojo(String name, String surname, String gender, Integer age, String identification, String address, String email, String phone) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -22,7 +22,7 @@ public class Person {
         this.phone = phone;
     }
 
-    public Person() {
+    public PersonPojo() {
     }
 
     public String getName() {
@@ -91,7 +91,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "PersonPojo{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", gender='" + gender + '\'' +

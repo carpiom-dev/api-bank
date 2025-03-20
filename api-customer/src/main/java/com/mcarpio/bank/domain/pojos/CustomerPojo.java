@@ -1,25 +1,25 @@
 package com.mcarpio.bank.domain.pojos;
 
-public class Customer extends Person {
+public class CustomerPojo extends PersonPojo {
 
     private Integer customerId;
     private String password;
     private Boolean status;
 
-    public Customer(String name, String surname, String gender, Integer age, String identification, String address, String email, String phone, Integer customerId, String password, Boolean status) {
+    public CustomerPojo(String name, String surname, String gender, Integer age, String identification, String address, String email, String phone, Integer customerId, String password, Boolean status) {
         super(name, surname, gender, age, identification, address, email, phone);
         this.customerId = customerId;
         this.password = password;
         this.status = status;
     }
 
-    public Customer(Integer customerId, String password, Boolean status) {
+    public CustomerPojo(Integer customerId, String password, Boolean status) {
         this.customerId = customerId;
         this.password = password;
         this.status = status;
     }
 
-    public Customer(){}
+    public CustomerPojo(){}
 
     public Integer getCustomerId() {
         return customerId;
@@ -47,7 +47,7 @@ public class Customer extends Person {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerPojo{" +
                 "customerId=" + customerId +
                 ", password='" + password + '\'' +
                 ", status=" + status +

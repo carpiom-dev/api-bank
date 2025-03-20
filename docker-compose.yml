@@ -1,38 +1,40 @@
 version: '3.8'
 
 services:
-  mysql_bank_db:
-    image: mysql:latest 
-    container_name: mysql_bank_db
+  postgres_bank_db:
+    image: postgres:latest
+    container_name: postgres_bank_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: bank
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: BankApi
     ports:
-      - "3306:3306"
+      - "5433:5432"  # Mapeo de puerto local (5433) al puerto del contenedor (5432)
     networks:
       - microservice-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      retries: 10
-      timeout: 15s
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
 
-  customer-microservice:
+  customer-api:
     build:
-      context: ./bank-client
+      context: ./api-customer
       dockerfile: Dockerfile 
-    container_name: customer-microservice
+    container_name: customer-api
     depends_on:
       mysql_bank_db:
         condition: service_healthy 
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_bank_db:3306/bank?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5433/BankApi?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
     ports:
-      - "8082:8082" 
+      - "9595:9595" 
     networks:
-      - microservice-network
+      - api-network
 
   account-microservice:
     build:
@@ -52,5 +54,5 @@ services:
       - microservice-network
 
 networks:
-  microservice-network:
+  api-network:
     driver: bridge
