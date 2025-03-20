@@ -1,0 +1,49 @@
+C:\Users\carpiom\source\repos\MS\MS.Application\bin\Debug\net6.0\MS.Application.deps.json
+C:\Users\carpiom\source\repos\MS\MS.Application\bin\Debug\net6.0\MS.Application.dll
+C:\Users\carpiom\source\repos\MS\MS.Application\bin\Debug\net6.0\MS.Application.pdb
+C:\Users\carpiom\source\repos\MS\MS.Application\obj\Debug\net6.0\MS.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\carpiom\source\repos\MS\MS.Application\obj\Debug\net6.0\MS.Application.AssemblyInfoInputs.cache
+C:\Users\carpiom\source\repos\MS\MS.Application\obj\Debug\net6.0\MS.Application.AssemblyInfo.cs
+C:\Users\carpiom\source\repos\MS\MS.Application\obj\Debug\net6.0\MS.Application.csproj.CoreCompileInputs.cache
+C:\Users\carpiom\source\repos\MS\MS.Application\obj\Debug\net6.0\MS.Application.dll
+C:\Users\carpiom\source\repos\MS\MS.Application\obj\Debug\net6.0\refint\MS.Application.dll
+C:\Users\carpiom\source\repos\MS\MS.Application\obj\Debug\net6.0\MS.Application.pdb
+C:\Users\carpiom\source\repos\MS\MS.Application\obj\Debug\net6.0\ref\MS.Application.dll
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Application.deps.json
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Application.dll
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Application.pdb
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Domain.dll
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Dto.dll
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Infrastructure.dll
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Dto.pdb
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Infrastructure.pdb
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\bin\Debug\net6.0\MS.Domain.pdb
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.csproj.AssemblyReference.cache
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.AssemblyInfoInputs.cache
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.AssemblyInfo.cs
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.csproj.CoreCompileInputs.cache
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\MS.Ap.23CA9347.Up2Date
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.dll
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\refint\MS.Application.dll
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.pdb
+C:\01 - Proyectos\Otros\MS\MS\src\MS.Application\obj\Debug\net6.0\ref\MS.Application.dll
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Application.deps.json
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Application.dll
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Application.pdb
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Domain.dll
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Dto.dll
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Infrastructure.dll
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Dto.pdb
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Infrastructure.pdb
+C:\Users\carpiom\source\repos\MS\src\MS.Application\bin\Debug\net6.0\MS.Domain.pdb
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.csproj.AssemblyReference.cache
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.AssemblyInfoInputs.cache
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.AssemblyInfo.cs
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.csproj.CoreCompileInputs.cache
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\MS.Appli.B44E212D.Up2Date
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.dll
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\refint\MS.Application.dll
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\MS.Application.pdb
+C:\Users\carpiom\source\repos\MS\src\MS.Application\obj\Debug\net6.0\ref\MS.Application.dll

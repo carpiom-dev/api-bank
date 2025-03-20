@@ -2,8 +2,7 @@ package com.mcarpio.bank.infrastructure.out.adapter;
 
 import com.mcarpio.bank.application.ports.out.ICustomerRepository;
 import com.mcarpio.bank.domain.pojos.CustomerPojo;
-import com.mcarpio.bank.infrastructure.out.entity.CustomerEntity;
-import com.mcarpio.bank.infrastructure.out.mapper.ICustomerMapper;
+import com.mcarpio.bank.infrastructure.out.mapper.ICustomerMapperImpl;
 import com.mcarpio.bank.infrastructure.out.repository.IJpaCustomerRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -13,11 +12,11 @@ import java.util.Optional;
 public class CustomerRepositoryImpl implements ICustomerRepository {
 
     private final IJpaCustomerRepository jpaCustomerRepository;
-    private final ICustomerMapper customerMapper;
+    private final ICustomerMapperImpl customerMapper;
 
-    public CustomerRepositoryImpl(ICustomerMapper customerMapper,IJpaCustomerRepository jpaCustomerRepository) {
-        this.customerMapper = customerMapper;
+    public CustomerRepositoryImpl(IJpaCustomerRepository jpaCustomerRepository, ICustomerMapperImpl customerMapper) {
         this.jpaCustomerRepository = jpaCustomerRepository;
+        this.customerMapper = customerMapper;
     }
 
     @Override

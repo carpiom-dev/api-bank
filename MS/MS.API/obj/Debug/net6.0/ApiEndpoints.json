@@ -1,0 +1,132 @@
+[
+  {
+    "ContainingType": "MS.API.Controllers.EventoController",
+    "Method": "CreateEvento",
+    "RelativePath": "api/Evento/CreateEvento",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fechaEvento",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "lugarEvento",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "descripcionEvento",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "precio",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MS.API.Controllers.EventoController",
+    "Method": "DeleteEventos",
+    "RelativePath": "api/Evento/DeleteEventos",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idEvento",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MS.API.Controllers.EventoController",
+    "Method": "GetEvento",
+    "RelativePath": "api/Evento/GetEvento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idEvento",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MS.API.Controllers.EventoController",
+    "Method": "GetEventos",
+    "RelativePath": "api/Evento/GetEventos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MS.API.Controllers.EventoController",
+    "Method": "UpdateEvento",
+    "RelativePath": "api/Evento/UpdateEvento",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idEvento",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaEvento",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "lugarEvento",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "descripcionEvento",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "precio",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MS.API.Controllers.UsuarioController",
+    "Method": "CreateEvento",
+    "RelativePath": "api/Usuario/login",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

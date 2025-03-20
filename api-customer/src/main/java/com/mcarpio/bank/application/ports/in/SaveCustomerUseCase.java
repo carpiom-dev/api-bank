@@ -3,6 +3,7 @@ import com.mcarpio.bank.application.ports.out.ICustomerRepository;
 import com.mcarpio.bank.application.ports.out.IPasswordEncoder;
 import com.mcarpio.bank.domain.pojos.CustomerPojo;
 import com.mcarpio.bank.infrastructure.exception.CustomerAlreadyExistsException;
+import org.springframework.stereotype.Service;
 
 public class SaveCustomerUseCase {
 
