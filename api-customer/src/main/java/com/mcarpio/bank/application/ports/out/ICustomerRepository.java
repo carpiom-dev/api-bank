@@ -7,8 +7,9 @@ import java.util.Optional;
 
 public interface ICustomerRepository {
     CustomerPojo save(CustomerPojo customerPojo);
-    CustomerPojo update(CustomerPojo customerPojo);
+    int disableCustomer(Integer customerId);
     List<CustomerPojo> findAll();
+    List<CustomerPojo> findByStatusTrue();
     Optional<CustomerPojo> findById(Integer id);
     Optional<CustomerPojo> findByIdentification(String identification);
 }

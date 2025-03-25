@@ -1,6 +1,6 @@
 package com.mcarpio.bank.infrastructure.in.dto;
 
-public record CustomerOutputDTO(
+public record CustomerOutDTO(
         Integer customerId,
         String name,
         String surname,

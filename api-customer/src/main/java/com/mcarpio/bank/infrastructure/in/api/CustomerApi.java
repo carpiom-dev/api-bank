@@ -1,8 +1,9 @@
 package com.mcarpio.bank.infrastructure.in.api;
 
 import com.mcarpio.bank.infrastructure.in.Handler.CustomerHandler;
-import com.mcarpio.bank.infrastructure.in.dto.CustomerInputDTO;
-import com.mcarpio.bank.infrastructure.in.dto.CustomerOutputDTO;
+import com.mcarpio.bank.infrastructure.in.dto.CustomerInDTO;
+import com.mcarpio.bank.infrastructure.in.dto.CustomerOutDTO;
+import com.mcarpio.bank.infrastructure.in.dto.CustomerUpdateInDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -30,8 +31,8 @@ public class CustomerApi {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
-    public ResponseEntity<List<CustomerOutputDTO>> findAll() {
-        return ResponseEntity.ok(customerHandler.findAll());
+    public ResponseEntity<List<CustomerOutDTO>> findAll() {
+        return ResponseEntity.ok(customerHandler.findByStatusTrue());
     }
 
     @Operation(summary = "Get a customer by ID", description = "Retrieve customer information based on the customer ID.")
@@ -40,12 +41,23 @@ public class CustomerApi {
             @ApiResponse(responseCode = "404", description = "Customer not found")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<CustomerOutputDTO>> findById(@PathVariable Integer id) {
-        return new ResponseEntity<>(customerHandler.findById(id), HttpStatus.OK);
+    public ResponseEntity<Optional<CustomerOutDTO>> findById(@PathVariable Integer id) {
+        return ResponseEntity.ok((customerHandler.findById(id)));
     }
 
     @PostMapping
-    public ResponseEntity<CustomerOutputDTO> save(@Valid @RequestBody CustomerInputDTO customerInputDTO) {
-        return new ResponseEntity<>(customerHandler.save(customerInputDTO), HttpStatus.CREATED);
+    public ResponseEntity<CustomerOutDTO> save(@Valid @RequestBody CustomerInDTO customerInDTO) {
+        return new ResponseEntity<>(customerHandler.save(customerInDTO), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        customerHandler.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<CustomerOutDTO> update(@Valid @RequestBody CustomerUpdateInDto update) {
+        return ResponseEntity.ok((customerHandler.update(update)));
     }
 }

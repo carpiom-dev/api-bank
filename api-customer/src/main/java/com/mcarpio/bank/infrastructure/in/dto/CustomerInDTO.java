@@ -2,7 +2,7 @@ package com.mcarpio.bank.infrastructure.in.dto;
 
 import jakarta.validation.constraints.*;
 
-public record CustomerInputDTO(
+public record CustomerInDTO(
         @NotBlank(message = "Name cannot be blank") String name,
         @NotBlank(message = "Surname cannot be blank") String surname,
         @NotBlank(message = "Gender cannot be blank") String gender,

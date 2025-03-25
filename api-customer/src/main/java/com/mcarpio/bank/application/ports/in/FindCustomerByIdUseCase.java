@@ -9,6 +9,7 @@ import java.util.Optional;
 public class FindCustomerByIdUseCase {
 
     private final ICustomerRepository customerRepository;
+
     public FindCustomerByIdUseCase(ICustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }

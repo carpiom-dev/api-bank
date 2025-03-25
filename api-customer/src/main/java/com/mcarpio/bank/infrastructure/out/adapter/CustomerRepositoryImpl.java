@@ -21,20 +21,26 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
 
     @Override
     public CustomerPojo save(CustomerPojo customerPojo) {
-        //Objects.requireNonNull(customerPojo, "CustomerPojo cannot be null");
         return customerMapper.toDto(
                 jpaCustomerRepository.save(customerMapper.toEntity(customerPojo))
         );
     }
 
     @Override
-    public CustomerPojo update(CustomerPojo customerPojo) {
-        return null;
+    public int disableCustomer(Integer customerId) {
+        return jpaCustomerRepository.disableCustomer(customerId);
     }
 
     @Override
     public List<CustomerPojo> findAll() {
         return jpaCustomerRepository.findAll().stream()
+                .map(customerMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<CustomerPojo> findByStatusTrue() {
+        return jpaCustomerRepository.findByStatusTrue().stream()
                 .map(customerMapper::toDto)
                 .toList();
     }
