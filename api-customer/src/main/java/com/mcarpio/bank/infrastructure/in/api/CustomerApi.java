@@ -1,17 +1,18 @@
 package com.mcarpio.bank.infrastructure.in.api;
 
 import com.mcarpio.bank.infrastructure.in.Handler.CustomerHandler;
+import com.mcarpio.bank.infrastructure.in.dto.CustomerInputDTO;
 import com.mcarpio.bank.infrastructure.in.dto.CustomerOutputDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("customers")
@@ -30,7 +31,21 @@ public class CustomerApi {
     })
     @GetMapping
     public ResponseEntity<List<CustomerOutputDTO>> findAll() {
-        var customers = customerHandler.findAll();
-        return ResponseEntity.ok(customers);
+        return ResponseEntity.ok(customerHandler.findAll());
+    }
+
+    @Operation(summary = "Get a customer by ID", description = "Retrieve customer information based on the customer ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved customer"),
+            @ApiResponse(responseCode = "404", description = "Customer not found")
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<CustomerOutputDTO>> findById(@PathVariable Integer id) {
+        return new ResponseEntity<>(customerHandler.findById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<CustomerOutputDTO> save(@Valid @RequestBody CustomerInputDTO customerInputDTO) {
+        return new ResponseEntity<>(customerHandler.save(customerInputDTO), HttpStatus.CREATED);
     }
 }

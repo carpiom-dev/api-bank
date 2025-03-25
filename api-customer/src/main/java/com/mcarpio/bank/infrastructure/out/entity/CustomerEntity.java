@@ -22,6 +22,9 @@ public class CustomerEntity extends PersonEntity {
     @Column(name = "customer_id")
     private Integer customerId;
 
+//    @Version
+//    private Long version;
+
     @NotBlank
     @Size(min = 8)
     @Column(name = "password", nullable = false)
