@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: BankApi
     ports:
-      - "5433:5432"  # Mapeo de puerto local (5433) al puerto del contenedor (5432)
+      - "5433:5432"
     networks:
       - microservice-network
     healthcheck:
@@ -25,34 +25,17 @@ services:
       dockerfile: Dockerfile 
     container_name: customer-api
     depends_on:
-      mysql_bank_db:
+      postgres_bank_db:
         condition: service_healthy 
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5433/BankApi?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_bank_db:5432/BankApi?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: admin
     ports:
       - "9595:9595" 
     networks:
-      - api-network
-
-  account-microservice:
-    build:
-      context: ./bank-account
-      dockerfile: Dockerfile 
-    container_name: account-microservice
-    depends_on:
-      mysql_bank_db:
-        condition: service_healthy 
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_bank_db:3306/bank?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-    ports:
-      - "8081:8081" 
-    networks:
       - microservice-network
 
 networks:
-  api-network:
+  microservice-network:
     driver: bridge
