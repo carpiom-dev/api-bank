@@ -1,151 +1,164 @@
-# 🏛️ Arquitectura Hexagonal con RabbitMQ en Spring Boot
+# 🏦 Microservicio Bank API
 
 ## 📌 Descripción
-Este proyecto implementa una **arquitectura hexagonal** utilizando **Spring Boot**, **RabbitMQ** para mensajería asíncrona y **MapStruct (versión 1.6.3)** para la conversión de DTOs y entidades. La estructura sigue **buenas prácticas** como separación de capas, manejo de excepciones y abstracción de infraestructura.
+Este microservicio gestiona la información de clientes en un sistema bancario. Implementa arquitectura hexagonal con **Spring Boot 3** y **Java 21**, utilizando **PostgreSQL** como base de datos y ejecutándose en **Docker**.
 
----
+## 🚀 Tecnologías Utilizadas
+- ☕ **Java 21**
+- 🌱 **Spring Boot 3**
+- 🏛️ **Arquitectura Hexagonal**
+- 🐘 **PostgreSQL**
+- 🐳 **Docker**
+- 🔄 **Lombok**
+- 📜 **JPA Hibernate**
+- 📡 **Spring WebFlux** (para operaciones reactivas)
+- 📊 **Swagger OpenAPI**
+- 📨 **RabbitMQ** (Mensajería asíncrona)
 
 ## 📂 Estructura del Proyecto
+```
+com.mcarpio.bank
+│── application
+│   ├── config
+│   └── ports
+│       ├── in (Casos de uso)
+│       │   ├── DeleteCustomerByIdUseCase
+│       │   ├── FindAllCustomerUseCase
+│       │   ├── FindByStatusTrueCustomerUseCase
+│       │   ├── FindCustomerByIdUseCase
+│       │   ├── SaveCustomerUseCase
+│       │   └── UpdateCustomerUseCase
+│       └── out (Interfaces y adaptadores externos)
+│           ├── ICustomerRepository
+│           ├── ILogBusMessageListener
+│           └── IPasswordEncoder
+│── domain
+│   ├── exception
+│   │   ├── CustomerAlreadyExistsException
+│   │   ├── CustomerNotFoundException
+│   │   └── ErrorResponse
+│   ├── pojos
+│   │   ├── CustomerPojo
+│   │   ├── Log
+│   │   └── PersonPojo
+│── infrastructure
+│   ├── in
+│   │   ├── api
+│   │   │   └── CustomerApi
+│   │   ├── dto
+│   │   │   ├── CustomerInDTO
+│   │   │   ├── CustomerOutDTO
+│   │   │   ├── CustomerUpdateInDto
+│   │   ├── handler
+│   │   │   └── CustomerHandler
+│   │   ├── mapper
+│   │       └── ICustomerMapperDto
+│   ├── out
+│   │   ├── adapter
+│   │   │   ├── CustomerRepositoryImpl
+│   │   │   ├── PasswordEncoderRepositoryImpl
+│   │   ├── config
+│   │   │   ├── OpenAPIConfig
+│   │   │   ├── RabbitConfig
+│   │   │   ├── RabbitProperties
+│   │   │   ├── UseCaseConfig
+│   │   ├── entity
+│   │   │   ├── CustomerEntity
+│   │   │   ├── PersonEntity
+│   │   ├── mapper
+│   │   │   ├── ICustomerMapper
+│   │   ├── rabbitmq
+│   │   ├── repository
+│   │   │   ├── IJpaCustomerRepository
+```
 
-📂 src/main/java/com/mcarpio/bank
-│── 📂 application
-│   ├── 📂 port/in        → Interfaces de casos de uso
-│   ├── 📂 port/out       → Interfaces para persistencia y mensajería
-│── 📂 domain
-│   ├── 📂 pojos             → Entidades de dominio
-│── 📂 infrastructure
-│   ├── 📂 input
-│   │   ├── 📂 api           → Controladores REST
-│   │   ├── 📂 dto           → DTOs para request/response
-│   │   ├── 📂 mapper        → Mappers entre DTOs y entidades
-│   ├── 📂 output
-│   │   ├── 📂 adapter       → Implementaciones de repositorios y seguridad
-│   │   ├── 📂 config        → Configuración de seguridad y mensajería
-│   │   ├── 📂 entity        → Entidades JPA
-│   │   ├── 📂 repository    → Interfaces JPA
-│   │   ├── 📂 messaging     → RabbitMQ Publisher & Listener
-│   ├── 📂 exception         → Gestión centralizada de excepciones
-│── 📜 BankClientApplication.java  → Clase principa
+## 📌 Configuración del Microservicio
 
----
+### Dockerfile
+```dockerfile
+FROM maven:3.9.9 AS build
+WORKDIR /construir
 
-### 1️⃣ **Dominio (`domain`)**
-📌 Contiene las entidades del negocio:
-- `model/Customer.java` → Representación del cliente en el dominio.
-- `model/Person.java` → Representación de una persona.
+RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
 
-### 2️⃣ **Aplicación (`application`)**
-📌 Contiene la lógica de negocio y los casos de uso:
-- **Configuración**:
-  - `config/RabbitConfig.java` → Configuración de RabbitMQ.
-  - `config/RabbitProperties.java` → Propiedades de conexión.
-- **Excepciones**:
-  - `exception/ConflictException.java` → Excepción para conflictos.
-  - `exception/EntityNotFoundException.java` → Excepción para entidades no encontradas.
-  - `exception/ErrorResponse.java` → Estructura de respuesta de error.
-- **Casos de Uso** (`port/input`):
-  - `CreateCustomerUseCase.java`
-  - `DeleteCustomerUseCase.java`
-  - `FindAllCustomerUseCase.java`
-  - `GetCustomerByIdUseCase.java`
-  - `UpdateCustomerUseCase.java`
-- **Puertos de salida** (`port/output`):
-  - `ICustomerRepository.java` → Puerto para persistencia.
-  - `IPasswordEncoder.java` → Puerto para codificación de contraseñas.
-  - `IRabbitListener.java` → Puerto para mensajería.
+COPY pom.xml ./
+RUN mvn dependency:go-offline
 
-### 3️⃣ **Infraestructura (`infrastructure`)**
+COPY . ./
+RUN mvn clean package -DskipTests && ls -l target/
 
-#### 📥 Entrada (`input`)
-- `controller/CustomerController.java` → Exposición de endpoints.
-- **DTOs** (`dto/`) → Modelos de entrada y salida:
-  - `CustomerRequestDTO.java`
-  - `CustomerResponseDTO.java`
-- **Manejo de errores** (`exception/`):
-  - `ErrorResponse.java`
-  - `GlobalErrorHandler.java`
-- `handler/CustomerHandler.java` → Lógica de procesamiento de peticiones.
-- `mapper/CustomerDTOMapper.java` → Mapeo de DTOs con **MapStruct 1.6.3**.
-- `messagebroker/BusListener.java` → Listener de RabbitMQ.
+FROM openjdk:21-jdk-slim
+WORKDIR /app
 
-#### 📤 Salida (`output`)
-- **Adaptadores** (`adapter/`):
-  - `ImplCustomerRepository.java` → Implementación del repositorio.
-  - `ImplPasswordEncoder.java` → Implementación de codificación de contraseñas.
-- **Configuración** (`config/`):
-  - `SecurityConfig.java` → Configuración de seguridad.
-- **Entidades** (`entity/`):
-  - `CustomerEntity.java` → Entidad JPA.
-  - `PersonEntity.java` → Entidad JPA.
-- **Mapeo** (`mapper/`):
-  - `CustomerMapper.java` → **Mapeo de entidades con MapStruct 1.6.3**.
-- **Repositorio** (`repository/`):
-  - `IOutPutCustomerRepository.java` → Repositorio de persistencia.
+COPY --from=build /construir/target/api-customer-1.0.jar app.jar
 
-### 4️⃣ **Mensajería con RabbitMQ (`messagebroker`)**
-📌 Se encarga de la integración con RabbitMQ:
-- `BusListener.java` → Consumidor de mensajes de RabbitMQ.
-- `RabbitConfig.java` → Configuración de colas y exchanges.
+EXPOSE 9595
 
----
+ENV DEFAULT_OPTIONS="-Duser.timezone=America/Guayaquil -Djava.net.preferIPv4Stack=true -Djava.security.egd=file:/dev/./urandom"
+ENV JAVA_OPTS="-Xms512m -Xmx896m"
 
-## 📌 📊 Diagrama de la Arquitectura
-```txt
-                       +-----------------------+
-                       |    🔹 Controller      |
-                       +----------+------------+
-                                  |
-                                  ▼
-                       +-----------------------+
-                       |    🔹 Handlers        |
-                       +----------+------------+
-                                  |
-                                  ▼
-               +---------------------------------------+
-               |         🔹 Casos de Uso              |
-               |  (application/port/input)           |
-               +---------------------------------------+
-                                  |
-                                  ▼
-               +---------------------------------------+
-               |         🔹 Repositorios              |
-               |  (application/port/output)          |
-               +---------------------------------------+
-                                  |
-                                  ▼
-               +---------------------------------------+
-               |         🔹 Persistencia              |
-               |  (infrastructure/output)            |
-               +---------------------------------------+
-                                  |
-                                  ▼
-               +---------------------------------------+
-               |         🔹 RabbitMQ                   |
-               |  (messagebroker)                     |
-               +---------------------------------------+
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+```
 
-## 🚀 Tecnologías Utilizadas  
-Este proyecto ha sido desarrollado utilizando las siguientes tecnologías:  
+### Configuración `application.yml`
+```yaml
+spring:
+  application:
+    name: api-customer
 
-- **Java 21**: Lenguaje de programación principal.  
-- **Spring Boot 3**: Framework para el desarrollo de aplicaciones empresariales.  
-- **Spring Web**: Para la creación de APIs REST.  
-- **Spring Data JPA**: Para la gestión de la persistencia con bases de datos relacionales.  
-- **Spring Security**: Para la autenticación y autorización.  
-- **MapStruct 1.6.3**: Librería para el mapeo automático entre entidades y DTOs.  
-- **RabbitMQ**: Sistema de mensajería asíncrona para la comunicación entre servicios.  
-- **PostgreSQL**: Base de datos relacional utilizada en el proyecto.  
-- **Docker**: Para la creación de contenedores y despliegue de la aplicación.  
-- **Docker Compose**: Para la gestión de múltiples contenedores, incluyendo la aplicación, RabbitMQ y PostgreSQL.  
+  profiles:
+    active: dev
 
----
+  datasource:
+    url: jdbc:postgresql://localhost:5433/BankApi
+    username: postgres
+    password: admin
 
-## 🐳 Ejecución con Docker Compose  
-Para ejecutar la aplicación junto con RabbitMQ y PostgreSQL, sigue estos pasos:  
+server:
+  port: 9595
+  servlet:
+    context-path: /api/v1
 
-1. **Asegúrate de tener Docker y Docker Compose instalados** en tu sistema.  
-2. **Ubícate en la raíz del proyecto**, donde se encuentra el archivo `docker-compose.yml`.  
-3. **Ejecuta el siguiente comando** para levantar los servicios:  
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+```
 
-```sh
+## 📌 Endpoints Swagger
+- 📜 API Docs: [http://localhost:9595/api/v1/v3/api-docs](http://localhost:9595/api/v1/v3/api-docs)
+- 📝 Swagger UI: [http://localhost:9595/api/v1/swagger-ui/index.html](http://localhost:9595/api/v1/swagger-ui/index.html)
+
+## 🔥 Instalación y Ejecución
+### 1️⃣ Prerrequisitos
+Asegúrate de tener instalado:
+- 🛠️ **JDK 21**
+- 🐳 **Docker & Docker Compose**
+- 🐘 **PostgreSQL**
+- 📨 **RabbitMQ**
+
+### 2️⃣ Clonar el repositorio
+```bash
+git https://github.com/carpiom-dev/api-bank.git
+```
+
+### 3️⃣ Construir y levantar servicios con Docker
+```bash
+docker-compose build
 docker-compose up -d
+```
+
+### 4️⃣ Ejecutar la aplicación manualmente
+```bash
+mvn spring-boot:run
+```
+
+## 📜 Licencia
+Este proyecto está bajo la licencia **MIT**. ¡Siéntete libre de contribuir! 🤝
+
+---
+🚀 Desarrollado con 💙 por Manuel Carpio
+
